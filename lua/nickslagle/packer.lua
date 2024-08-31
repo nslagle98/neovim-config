@@ -1,13 +1,27 @@
 vim.cmd.packadd('packer.nvim')
 
+
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-
+  use {
+      'kkoomen/vim-doge',
+      run = ':call doge#install()'
+  }
+  use 'sbdchd/neoformat'
+  use 'BurntSushi/ripgrep'
+  use 'sharkdp/fd'
   use {
       'nvim-telescope/telescope.nvim', tag = '0.1.0',
       -- or                            , branch = '0.1.x',
       requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  
+  use {
+    'laytan/tailwind-sorter.nvim',
+    requires = {'nvim-treesitter/nvim-treesitter', 'nvim-lua/plenary.nvim'},
+    config = function() require('tailwind-sorter').setup() end,
+    run = 'cd formatter && npm i && npm run build',
   }
 
   use({
